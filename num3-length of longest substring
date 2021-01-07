@@ -1,0 +1,34 @@
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        //first - check if input is valid
+        if (s == null || s.length() == 0) return 0;
+        
+        //initialize values
+        int i = 0; //pointer
+        int j = 0; //pointer 
+        int max = 0; //number of unique chars in substring
+        Set<Character> set = new HashSet<>();
+        
+        //pointers need to move, i is first pointer to move
+        while (i < s.length()){
+            //extract character at i pointer position 
+            char c = s.charAt(i);
+            //we need to check if charAt(i) is already in set so we know if we need
+            //to move j pointer or not
+            while(set.contains(c)){
+                set.remove(s.charAt(j)); 
+                ++j;
+            }
+            set.add(c);
+            //we need to compute length of window. 
+            //must determine is length is greater than our max. 
+            max = Math.max(max, i - j + 1); 
+            //increase i to move forward.
+            ++i;
+        }
+        return max;
+        
+        
+        
+    }
+}
